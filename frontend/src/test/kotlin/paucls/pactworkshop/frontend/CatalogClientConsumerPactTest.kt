@@ -69,6 +69,7 @@ class CatalogClientConsumerPactTest {
                 .stringType("type", "STATIONERY")
                 .stringType("name", "Colored Pencils Set")
                 .stringValue("availability", "OutOfStock")
+                .booleanType("isFavouriteProduct", true)
                 .close()
 
         return builder
@@ -92,8 +93,24 @@ class CatalogClientConsumerPactTest {
         assertThat(product.type).isEqualTo("STATIONERY")
         assertThat(product.name).isEqualTo("Colored Pencils Set")
         assertThat(product.availability).isEqualTo(OutOfStock)
+        assertThat(product.isFavouriteProduct).isTrue()
     }
 
-    // TODO: Add a new contract test for the favourite a product in catalog service interaction
-    // Example POST /products/{productId} with no body
+    @Pact(consumer = "frontend")
+    fun pact_favourite_a_product(builder: PactDslWithProvider): RequestResponsePact {
+        return builder
+                .given("product with id 10 exists")
+                .uponReceiving("a request to favourite a product")
+                .method("POST")
+                .matchPath("/products/10/favourite")
+                .willRespondWith()
+                .status(204)
+                .toPact()
+    }
+
+    @PactTestFor(pactMethod = "pact_favourite_a_product")
+    @Test
+    fun favourite_a_product(mockServer: MockServer) {
+        catalogClient.favouriteProduct(10)
+    }
 }
