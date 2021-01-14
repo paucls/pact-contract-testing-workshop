@@ -93,4 +93,7 @@ class CatalogClientConsumerPactTest {
         assertThat(product.name).isEqualTo("Colored Pencils Set")
         assertThat(product.availability).isEqualTo(OutOfStock)
     }
+
+    // TODO: Add a new contract test for the favourite a product in catalog service interaction
+    // Example POST /products/{productId} with no body
 }
