@@ -17,8 +17,7 @@ class ProductController(private val productService: ProductService) {
         return productService.getAllProducts()
     }
 
-    // Not what the frontend expects
-    @RequestMapping(value = ["/product/{id}"])
+    @RequestMapping(value = ["/products/{id}"])
     fun getProduct(@PathVariable id: Int): Product {
         return productService.getProduct(id)
     }
