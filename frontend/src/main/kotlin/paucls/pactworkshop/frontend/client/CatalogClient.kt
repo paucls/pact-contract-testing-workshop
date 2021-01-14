@@ -18,6 +18,6 @@ class CatalogClient(@Value("\${CATALOG_BASE_URL}") private val catalogBaseUrl: S
     }
 
     fun favouriteProduct(id: Int) {
-        // TODO: Using CDC testing implement POST request to favourite a product in catalog service
+        restTemplate.postForLocation("$catalogBaseUrl/products/{id}/favourite", null, id)
     }
 }
