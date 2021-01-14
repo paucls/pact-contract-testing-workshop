@@ -13,4 +13,10 @@ class ProductService(
     fun getProduct(id: Int): Product {
         return productRepository.getProduct(id)
     }
+
+    fun favouriteProduct(id: Int) {
+        val product = productRepository.getProduct(id)
+        product.isFavouriteProduct = true
+        productRepository.save(product)
+    }
 }
