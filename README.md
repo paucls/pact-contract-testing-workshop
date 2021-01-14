@@ -26,6 +26,25 @@ To import a project in [IntelliJ](https://www.jetbrains.com/idea/download/) foll
 - Go to `File -> Open` and select the project folder `catalog`
 - On the Import Project from Gradle dialog select `Use auto-import` and `Use default gradle wrapper` options. Then click OK.
 
+## Running the demo Pact Broker
+In a terminal start the [dockerized pact broker](https://hub.docker.com/r/pactfoundation/pact-broker/).
+```
+$ docker-compose -f docker-compose-broker.yml up
+```
+
+Open the broker url http://localhost:9292/
+
+## Consumer publishes pact to broker
+```
+./gradlew pactPublish
+```
+
+## Check with broker if service can be deployed
+```
+cd frontend
+./gradlew canideploy -Ppacticipant='catalog' -Platest=true
+```
+
 ## References
 - https://docs.pact.io/implementation_guides/jvm/consumer/junit5
 - https://docs.pact.io/implementation_guides/jvm/provider/junit5spring
