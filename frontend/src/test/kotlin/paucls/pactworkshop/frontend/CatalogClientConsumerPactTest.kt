@@ -69,7 +69,6 @@ class CatalogClientConsumerPactTest {
                 .stringType("type", "STATIONERY")
                 .stringType("name", "Colored Pencils Set")
                 .stringValue("availability", "OutOfStock")
-                .booleanType("isFavouriteProduct", true)
                 .close()
 
         return builder
