@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	kotlin("jvm") version "1.4.32"
 	kotlin("plugin.spring") version "1.4.32"
+	id("au.com.dius.pact") version "4.1.0"
 }
 
 group = "paucls.pactworkshop"
@@ -35,4 +36,10 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+pact {
+	publish {
+		pactBrokerUrl = "http://localhost:9292"
+	}
 }
